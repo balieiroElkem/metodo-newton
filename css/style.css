@@ -1,0 +1,72 @@
+* {
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-group {
+    font-size: 22px;
+}
+
+.btn-group {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    width: 100%;
+}
+
+.btn {
+    display: block;
+    width: 50%;
+    background-color: #2b124c;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 20px;
+    outline: none;
+    border: 0;
+    margin: auto;
+    cursor: pointer;
+    transition: all .9s ease;
+}
+
+.btn:hover {
+    background-color: #1d1a39;
+    box-shadow: 5px 5px 15px 10px rgba(0, 0, 0, 0.2), -5px -5px 15px 10px rgba(0, 0, 0, 0.2);
+    color: rgba(197, 179, 179, 0.849);
+}
+
+.title {
+    margin-bottom: 20px;
+}
+
+fieldset {
+    width: 40vw;
+    /* padding: 2rem; */
+    padding: 2rem 0.5rem;
+    text-align: center;
+}
+
+.input-equacao {
+    width: 100%;
+    padding: 0 10px;
+    border-radius: 3px;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    outline: none;
+    height: 20px;
+}
+
+input:focus {
+    outline: none !important;
+}
