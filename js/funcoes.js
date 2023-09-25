@@ -16,6 +16,7 @@ function jocobiana(equacao1, equacao2) {
 
 }
 
-function derivada(equacao) {
-    
+function derivada(equacao, variavel) {
+    variavel = math.parse(variavel);
+    return math.derivative(equacao, variavel);
 }
