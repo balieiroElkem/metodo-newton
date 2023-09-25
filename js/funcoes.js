@@ -1,10 +1,21 @@
 function renderFormula() {
-    const textInput = document.querySelector(".input-equacao").value;
-    const containerFormula = document.getElementById("formula");
+    const parcela1 = document.getElementById("parcela1").value;
+    const parcela2 = document.getElementById("parcela2").value;
+    katex.render(
+        `\\begin{array}{l}${parcela1} \\\\${parcela2}\\end{array}`,
+        document.getElementById("formula"),
+        { displayMode: true }
+    );
+}
 
-    const formulaDigitada = `\\(${textInput}\\)`;
+function divideEquacaoPorSinal(equacao) {
+    return equacao.split(/[+,-\s]+/);
+}
 
-    containerFormula.innerHTML = formulaDigitada;
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, containerFormula]);
-    // MathJax.typeset([containerFormula]);
+function jocobiana(equacao1, equacao2) {
+
+}
+
+function derivada(equacao) {
+    
 }
