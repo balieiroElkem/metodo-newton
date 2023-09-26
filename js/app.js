@@ -7,7 +7,8 @@ window.onload = () => {
         event.preventDefault();
         let primeiraParcela = this.querySelector("#parcela1").value;
         let segundaParcela = this.querySelector("#parcela2").value;
-        let monomoPrimeiraParcela = divideEquacaoPorSinal(primeiraParcela);
-        let monomoSegundoParcela = divideEquacaoPorSinal(segundaParcela);
+        let pontoX1 = this.querySelector("#pontox_1").value;
+        let pontoX2 = this.querySelector("#pontox_2").value;
+        let result = calcula(primeiraParcela, segundaParcela, pontoX1, pontoX2);
     });
 }
