@@ -9,6 +9,13 @@ window.onload = () => {
         let segundaParcela = this.querySelector("#parcela2").value;
         let pontoX1 = this.querySelector("#pontox_1").value;
         let pontoX2 = this.querySelector("#pontox_2").value;
+        if (!primeiraParcela || !segundaParcela || !pontoX1 || !pontoX2) {
+            alert("Todas os campos têm que serem preenchidos");
+            return false;
+        }
         let result = calcula(primeiraParcela, segundaParcela, pontoX1, pontoX2);
+        console.log();
+        const matriz = `\\begin{bmatrix} ${math.row(result, 0).toArray()} \\\\ ${math.row(result, 1).toArray()} \\end{bmatrix}`;
+        katex.render(matriz, document.getElementById("resultado"));
     });
 }
