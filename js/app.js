@@ -14,7 +14,6 @@ window.onload = () => {
             return false;
         }
         let result = calcula(primeiraParcela, segundaParcela, pontoX1, pontoX2);
-        console.log();
         const matriz = `\\begin{bmatrix} ${math.row(result, 0).toArray()} \\\\ ${math.row(result, 1).toArray()} \\end{bmatrix}`;
         katex.render(matriz, document.getElementById("resultado"));
     });
