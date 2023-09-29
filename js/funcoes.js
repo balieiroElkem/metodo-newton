@@ -22,10 +22,6 @@ function calcula(equacao1, equacao2, pontx1, pontx2) {
     return resultx1;
 }
 
-function normaEuclidiana(vetor) {
-    return math.norm(vetor);
-}
-
 function jacobiana(equacao1, equacao2, variavel1, variavel2, pontx1, pontx2) {
     let obj = {};
     obj[variavel1] = pontx1;
