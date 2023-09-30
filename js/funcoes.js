@@ -17,7 +17,7 @@ function calcula(equacao1, equacao2, pontx1, pontx2) {
 
     const matrizJacobiana = jacobiana(equacao1, equacao2, variaveisEqua[0], variaveisEqua[1], pontx1, pontx2);
     const matrizEquacao = formatMatrizEquacao(equacao1, equacao2, variaveisEqua[0], variaveisEqua[1], pontx1, pontx2);
-    const resultMultiply = math.multiply(math.inv(matrizJacobiana), matrizEquacao);
+    const resultMultiply = math.multiply(math.inv(matrizJacobiana), math.multiply(matrizEquacao, -1));
     const resultx1 = math.add(math.matrix([[pontx1],[pontx2]]), resultMultiply);
     return resultx1;
 }
@@ -26,7 +26,7 @@ function jacobiana(equacao1, equacao2, variavel1, variavel2, pontx1, pontx2) {
     let obj = {};
     obj[variavel1] = pontx1;
     obj[variavel2] = pontx2;
-    let jacobiana = math.matrix([
+    const jacobiana = math.matrix([
         [derivada(equacao1, variavel1).evaluate(obj), derivada(equacao1, variavel2).evaluate(obj)],
         [derivada(equacao2, variavel1).evaluate(obj), derivada(equacao2, variavel2).evaluate(obj)]
     ]);
@@ -37,7 +37,7 @@ function formatMatrizEquacao(equacao1, equacao2, variavel1, variavel2, pontx1, p
     let obj = {};
     obj[variavel1] = pontx1;
     obj[variavel2] = pontx2;
-    let matriz = math.matrix([
+    const matriz = math.matrix([
         [math.evaluate(equacao1, obj)],
         [math.evaluate(equacao2, obj)]
     ]);
