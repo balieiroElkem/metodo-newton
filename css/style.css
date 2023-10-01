@@ -69,3 +69,8 @@ fieldset {
 input:focus {
     outline: none !important;
 }
+
+#resultado {
+    display: flex;
+    justify-content: center;
+}

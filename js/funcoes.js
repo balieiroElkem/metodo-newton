@@ -2,7 +2,7 @@ function renderFormula() {
     const parcela1 = document.getElementById("parcela1").value;
     const parcela2 = document.getElementById("parcela2").value;
     katex.render(
-        `\\begin{array}{l}${parcela1} \\\\${parcela2}\\end{array}`,
+        `\\begin{cases}${parcela1} \\\\${parcela2}\\end{cases}`,
         document.getElementById("formula"),
         { displayMode: true }
     );
@@ -12,14 +12,30 @@ function divideEquacaoPorSinal(equacao) {
     return equacao.split(/[+,-\s]+/);
 }
 
-function calcula(equacao1, equacao2, pontx1, pontx2) {
+function calcula(equacao1, equacao2, pontx1, pontx2, precisao) {
+    const MAX_INTERACOES = 5;
     let variaveisEqua = removerDuplicatas([...identificarVariaveis(equacao1), ...identificarVariaveis(equacao2)]);
 
-    const matrizJacobiana = jacobiana(equacao1, equacao2, variaveisEqua[0], variaveisEqua[1], pontx1, pontx2);
-    const matrizEquacao = formatMatrizEquacao(equacao1, equacao2, variaveisEqua[0], variaveisEqua[1], pontx1, pontx2);
-    const resultMultiply = math.multiply(math.inv(matrizJacobiana), math.multiply(matrizEquacao, -1));
-    const resultx1 = math.add(math.matrix([[pontx1],[pontx2]]), resultMultiply);
-    return resultx1;
+    let x = 0;
+    let k = 1;
+    let norma = 0;
+    let max = 0;
+    do {
+        let matrizJacobiana = jacobiana(equacao1, equacao2, variaveisEqua[0], variaveisEqua[1], pontx1, pontx2);
+        let matrizEquacao = formatMatrizEquacao(equacao1, equacao2, variaveisEqua[0], variaveisEqua[1], pontx1, pontx2);
+
+        let s = math.multiply(math.inv(matrizJacobiana), math.multiply(matrizEquacao, -1));
+        x = math.add(math.matrix([[pontx1], [pontx2]]), s); // aqui vem o valor de x1
+
+        norma = calculaNorma(formatMatrizEquacao(equacao1, equacao2, variaveisEqua[0], variaveisEqua[1], math.row(x, 0).toArray()[0][0], math.row(x, 1).toArray()[0][0]));
+        let x_inicial1 = pontx1;
+        let x_inicial2 = pontx2; 
+        pontx1 = math.row(x, 0).toArray()[0][0];
+        pontx2 = math.row(x, 1).toArray()[0][0]; 
+        max = math.max(math.abs(math.subtract(math.matrix([[pontx1], [pontx2]]), math.matrix([[x_inicial1], [x_inicial2]]))));
+    } while (++k <= MAX_INTERACOES && norma > precisao && max > precisao);
+
+    return [{variavel1:variaveisEqua[0], variavel2:variaveisEqua[1]}, math.round(x)];
 }
 
 function jacobiana(equacao1, equacao2, variavel1, variavel2, pontx1, pontx2) {
@@ -55,4 +71,8 @@ function removerDuplicatas(array) {
 
 function identificarVariaveis(equacao) {
     return equacao.match(/[a-zA-Z]/g);
+}
+
+function calculaNorma(matriz) {
+    return math.norm(matriz, 'fro');
 }

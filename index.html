@@ -22,12 +22,17 @@
                     <input type="text" class="input-equacao" id="parcela1" placeholder="Equação 1">
                     <input type="text" class="input-equacao" id="parcela2" placeholder="Equação 2">
                     <input type="number" id="pontox_1" style="margin-top: 15px"  max="1000" step=".01" placeholder="Ponto x_1">
-                    <input type="number" id="pontox_2" style="margin-top: 15px"  max="1000" step=".01" placeholder="Pont x_2">
+                    <input type="number" id="pontox_2" style="margin-top: 15px"  max="1000" step=".01" placeholder="Ponto x_2">
+                    <br>
+                    <input type="number" name="" id="precisao" placeholder="Precisão" max="1000" step=".00000001" placeholder="Ponto x_1">
                 </div>
                 <div class="btn-group">
                     <button class="btn" type="submit">Calcular</button>
                 </div>
-                <div id="resultado"></div>
+                <div id="resultado">
+                    <div id="variaveis"></div>
+                    <div id="matriz"></div>
+                </div>
             </fieldset>
         </form>
     </div>
