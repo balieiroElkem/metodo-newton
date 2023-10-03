@@ -13,7 +13,7 @@ function divideEquacaoPorSinal(equacao) {
 }
 
 function calcula(equacao1, equacao2, pontx1, pontx2, precisao) {
-    const MAX_INTERACOES = 5;
+    const MAX_INTERACOES = 6;
     let variaveisEqua = removerDuplicatas([...identificarVariaveis(equacao1), ...identificarVariaveis(equacao2)]);
 
     let x = 0;
@@ -35,7 +35,10 @@ function calcula(equacao1, equacao2, pontx1, pontx2, precisao) {
         max = math.max(math.abs(math.subtract(math.matrix([[pontx1], [pontx2]]), math.matrix([[x_inicial1], [x_inicial2]]))));
     } while (++k <= MAX_INTERACOES && norma > precisao && max > precisao);
 
-    return [{variavel1:variaveisEqua[0], variavel2:variaveisEqua[1]}, math.round(x)];
+    // 4x-x^3+y
+    // -x^2/9+(4y-y^2)/4+1
+    return [{variavel1:variaveisEqua[0], variavel2:variaveisEqua[1]}, math.round(x, 5)];
+    // return [{variavel1:variaveisEqua[0], variavel2:variaveisEqua[1]}, x];
 }
 
 function jacobiana(equacao1, equacao2, variavel1, variavel2, pontx1, pontx2) {
